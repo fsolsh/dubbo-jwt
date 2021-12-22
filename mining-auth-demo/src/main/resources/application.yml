@@ -1,0 +1,11 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /
+
+dubbo:
+  registry:
+    address: nacos://127.0.0.1:8848
+    timeout: 10000
+  application:
+    name: auth-demo

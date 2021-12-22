@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--定义日志上下文名称-->
+    <property name="APP_NAME" value="auth-demo"/>
+    <!--定义日志文件-->
+    <property name="LOG_FILE" value="logs/${APP_NAME}"/>
+
+    <!--定义JSON格式，使用LogstashEncoder-->
+    <appender name="JSON_FORMAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <Encoding>UTF-8</Encoding>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--定义异步输出，依赖JSON_FORMAT appender-->
+    <appender name="ASYNC_EXPORT" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref="JSON_FORMAT"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_EXPORT"/>
+    </root>
+
+</configuration>

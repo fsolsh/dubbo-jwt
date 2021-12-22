@@ -36,10 +36,7 @@ dubbo:
     timeout: 10000
     
 ##集成mining-auth-client之后，默认拦截所有http请求，请求都需要进行Token验证
-##绕开token验证的可选方式一：在Controller的方法上添加@NoTokenRequired注解
-##绕开token验证的可选方式二：通过auth.without_verification_url配置无须Token验证的请求地址，多个地址可以用逗号隔开
-auth:
-  without_verification_url: /demo/userLogin,/demo/isValidToken,/demo/verifyToken
+##绕开token验证：在Controller的Type或者Method上添加@NoTokenRequired注解
 ```
 4.1.3：开启Dubbo服务
 ```

@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 @DubboService
 public class AuthServiceImpl implements AuthService {
 
-    private static final String SLAT = "@#$%^&*xm*&^%$#@";
+    private static final String SLAT = "@#$$#@";
     private static final ExecutorService THREAD_POOL = Executors.newFixedThreadPool(4);
 
     @Value("${jwt.secret.key}")
@@ -64,7 +64,6 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean isValidJWT(String jwtToken) {
-        log.info("execute isValidJWT : {}", jwtToken.substring(0, 10));
         return getTokenInfo(jwtToken) != null;
     }
 
@@ -77,7 +76,6 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public AuthDTO verifyJWT(String jwtToken) {
-        log.info("execute verifyJWT : {}", jwtToken.substring(0, 10));
         AuthDTO authDTO = getTokenInfo(jwtToken);
         if (authDTO != null) {
             THREAD_POOL.submit(() ->
